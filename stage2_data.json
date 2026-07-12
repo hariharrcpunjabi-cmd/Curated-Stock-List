@@ -1,0 +1,134 @@
+{
+  "updated": "2026-07-12",
+  "source": "Chartink Claude Project scan (NSE/BSE mainboard + NSE Emerge)",
+  "note": "Weekly Stage 2 momentum shortlist. Not investment advice.",
+  "default_stop_pct": 8,
+  "stocks": [
+    {
+      "rank": 1,
+      "name": "Bandhan Bank Ltd",
+      "symbol": "BANDHANBNK",
+      "sector": "Banking (Private)",
+      "close": 210.0
+    },
+    {
+      "rank": 2,
+      "name": "AvenuesAI Ltd",
+      "symbol": "CCAVENUE",
+      "sector": "Fintech / IT",
+      "close": 18.1
+    },
+    {
+      "rank": 3,
+      "name": "Equitas Small Finance Bank Ltd",
+      "symbol": "EQUITASBNK",
+      "sector": "Banking (Small Finance)",
+      "close": 82.24
+    },
+    {
+      "rank": 4,
+      "name": "Rbl Bank Limited",
+      "symbol": "RBLBANK",
+      "sector": "Banking (Private)",
+      "close": 380.65
+    },
+    {
+      "rank": 5,
+      "name": "Bank Of India Ltd",
+      "symbol": "BANKINDIA",
+      "sector": "Banking (PSU)",
+      "close": 144.9
+    },
+    {
+      "rank": 6,
+      "name": "Ujjivan Small Finance Bank Ltd",
+      "symbol": "UJJIVANSFB",
+      "sector": "Banking (Small Finance)",
+      "close": 65.27
+    },
+    {
+      "rank": 7,
+      "name": "Lloyds Enterprises Ltd",
+      "symbol": "LLOYDSENT",
+      "sector": "Metals & Mining",
+      "close": 78.18
+    },
+    {
+      "rank": 8,
+      "name": "Gandhar Oil Refinery (India) Ltd",
+      "symbol": "GANDHAR",
+      "sector": "Oil & Gas",
+      "close": 203.15
+    },
+    {
+      "rank": 9,
+      "name": "Walchandnagar Industries Limited",
+      "symbol": "WALCHANNAG",
+      "sector": "Capital Goods / Engineering",
+      "close": 261.0
+    },
+    {
+      "rank": 10,
+      "name": "One 97 Communications Ltd",
+      "symbol": "PAYTM",
+      "sector": "Fintech",
+      "close": 1341.8
+    },
+    {
+      "rank": 11,
+      "name": "Subex Ltd",
+      "symbol": "SUBEXLTD",
+      "sector": "IT / Software",
+      "close": 13.23
+    },
+    {
+      "rank": 12,
+      "name": "Enviro Infra Engineers Ltd",
+      "symbol": "EIEL",
+      "sector": "Infrastructure (Water/Enviro)",
+      "close": 244.49
+    },
+    {
+      "rank": 13,
+      "name": "Mangalore Refinery And Petrochemicals Limited",
+      "symbol": "MRPL",
+      "sector": "Oil & Gas",
+      "close": 162.49
+    },
+    {
+      "rank": 14,
+      "name": "The South Indian Bank Limited",
+      "symbol": "SOUTHBANK",
+      "sector": "Banking (Private)",
+      "close": 45.81
+    },
+    {
+      "rank": 15,
+      "name": "Chennai Petroleum Corporation Limited",
+      "symbol": "CHENNPETRO",
+      "sector": "Oil & Gas",
+      "close": 1180.7
+    },
+    {
+      "rank": 16,
+      "name": "Northern ARC Capital Ltd",
+      "symbol": "NORTHARC",
+      "sector": "Financial Services (NBFC)",
+      "close": 325.3
+    },
+    {
+      "rank": 17,
+      "name": "Omaxe Limited",
+      "symbol": "OMAXE",
+      "sector": "Realty",
+      "close": 90.48
+    },
+    {
+      "rank": 18,
+      "name": "Shreeji Shipping Global Ltd",
+      "symbol": "SHREEJISPG",
+      "sector": "Shipping / Logistics",
+      "close": 551.75
+    }
+  ]
+}

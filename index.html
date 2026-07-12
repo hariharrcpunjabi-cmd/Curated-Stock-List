@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stage 2 Momentum Board</title>
+<meta name="description" content="Weekly Stage 2 momentum shortlist for Indian equities.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14161C; --muted:#6B7180; --faint:#9AA0AC;
+    --page:#EEF0F3; --card:#FFFFFF; --line:#E3E5EA;
+    --indigo:#283C74; --indigo-bg:#EAEDF6;
+    --teal:#0E7C5A; --teal-bg:#E4F3ED;
+    --amber:#A9670C; --amber-bg:#FBF0DD;
+    --slate:#4A5468; --slate-bg:#EDEFF3;
+    --down:#B23A38;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,sans-serif; color:var(--ink);
+    background:var(--page); line-height:1.5;
+    -webkit-font-smoothing:antialiased; padding-bottom:48px;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+  .num{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+
+  header.top{background:var(--ink);color:#fff;padding:22px 0 18px}
+  header.top .wrap{display:flex;flex-direction:column;gap:6px}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#8EA0C8}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;margin:0;letter-spacing:-0.02em}
+  .stamp{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:baseline;margin-top:4px;font-size:13px;color:#B8BECB}
+  .stamp b{color:#fff;font-weight:600}
+  .tape{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7C8AAE;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .bar{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  .bar .wrap{display:flex;flex-wrap:wrap;gap:16px 22px;align-items:center;padding:12px 16px}
+  .ctrl{display:flex;flex-direction:column;gap:3px;min-width:150px;flex:1}
+  .ctrl label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .ctrl .row{display:flex;align-items:center;gap:10px}
+  input[type=range]{flex:1;accent-color:var(--indigo);height:4px}
+  input[type=number]{font-family:'IBM Plex Mono',monospace;width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:#fff;color:var(--ink)}
+  input[type=number]:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px var(--indigo-bg)}
+  .val{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;min-width:44px;text-align:right}
+
+  .summary{padding:16px 0 4px}
+  .summary p{margin:0;font-size:14px;color:var(--slate)}
+  .summary .hi{color:var(--indigo);font-weight:600}
+
+  .grid{display:grid;grid-template-columns:1fr;gap:10px;padding:12px 0}
+  @media(min-width:620px){.grid{grid-template-columns:1fr 1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;border-left-width:4px;padding:12px 14px}
+  .card .head{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+  .rank{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--faint)}
+  .sym{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;letter-spacing:-0.01em}
+  .name{font-size:12.5px;color:var(--muted);margin:0 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-bottom:9px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;border-top:1px solid var(--line);padding-top:9px}
+  .stat{display:flex;flex-direction:column;gap:1px}
+  .stat .k{font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .stat .v{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500}
+  .stat .v.stop{color:var(--down)}
+  .stat .v.qty{color:var(--teal)}
+  .stat.hidden{display:none}
+
+  .logic{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:8px}
+  .logic h2{font-family:'Space Grotesk',sans-serif;font-size:16px;margin:0 0 10px;font-weight:600}
+  .logic ol{margin:0;padding-left:20px}
+  .logic li{font-size:13.5px;color:var(--slate);margin-bottom:8px}
+  .logic li b{color:var(--ink);font-weight:600}
+  .logic .mono{font-family:'IBM Plex Mono',monospace;background:var(--slate-bg);padding:1px 5px;border-radius:5px;font-size:12.5px}
+
+  footer{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+  footer b{color:var(--ink)}
+  .disc{margin-top:8px;font-size:11.5px;color:var(--faint)}
+  @media(prefers-reduced-motion:no-preference){.card{transition:border-left-color .2s}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="eyebrow">Weinstein Stage 2 &middot; NSE / BSE</span>
+    <h1>Momentum Board</h1>
+    <div class="stamp">
+      <span>Updated <b id="updated">--</b></span>
+      <span><b id="count">--</b> stocks</span>
+      <span>Refresh for the latest list</span>
+    </div>
+    <div class="tape num" id="tape"></div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="ctrl">
+      <label>Protective stop</label>
+      <div class="row">
+        <input type="range" id="stop" min="4" max="15" step="0.5" value="8">
+        <span class="val" id="stopval">8%</span>
+      </div>
+    </div>
+    <div class="ctrl">
+      <label>Risk per trade (&#8377;) &middot; optional</label>
+      <div class="row">
+        <input type="number" id="risk" placeholder="e.g. 2000" min="0" step="500">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="summary"><p id="summary"></p></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="logic">
+    <h2>How the stop-loss works</h2>
+    <ol>
+      <li><b>Structural exit (primary).</b> A weekly close below the rising 30-week moving average means Stage 2 is over &mdash; exit. This stop trails <i>up</i> on its own as the 30-week MA climbs. Confirm it on your chart each weekend; it isn't a fixed number.</li>
+      <li><b>Protective stop (tactical).</b> Because the 30-week MA can sit far below a fresh entry, set a hard floor at <span class="mono" id="l-pct">8%</span> below entry to cap the initial drawdown. Slider above adjusts it live.</li>
+      <li><b>Trail it.</b> Move the stop to breakeven once the stock is up ~8% from entry. After that, trail the protective stop <span class="mono" id="l-pct2">8%</span> below the highest weekly close reached.</li>
+      <li><b>Position size.</b> Enter your rupee risk per trade above and each card shows suggested quantity: <span class="mono">qty = risk &divide; (entry &minus; stop)</span>. Keeps every position risking the same amount regardless of price.</li>
+    </ol>
+  </div>
+
+  <footer>
+    <div>Source: <b id="src">--</b></div>
+    <div class="disc">Educational / screening output, not investment advice. Verify Stage 2 status and the 30-week MA on your own charts before acting. Prices are as of the update stamp and are not live.</div>
+  </footer>
+</div>
+
+<script>
+  const EMBEDDED = {"updated": "2026-07-12", "source": "Chartink Claude Project scan (NSE/BSE mainboard + NSE Emerge)", "note": "Weekly Stage 2 momentum shortlist. Not investment advice.", "default_stop_pct": 8, "stocks": [{"rank": 1, "name": "Bandhan Bank Ltd", "symbol": "BANDHANBNK", "sector": "Banking (Private)", "close": 210.0}, {"rank": 2, "name": "AvenuesAI Ltd", "symbol": "CCAVENUE", "sector": "Fintech / IT", "close": 18.1}, {"rank": 3, "name": "Equitas Small Finance Bank Ltd", "symbol": "EQUITASBNK", "sector": "Banking (Small Finance)", "close": 82.24}, {"rank": 4, "name": "Rbl Bank Limited", "symbol": "RBLBANK", "sector": "Banking (Private)", "close": 380.65}, {"rank": 5, "name": "Bank Of India Ltd", "symbol": "BANKINDIA", "sector": "Banking (PSU)", "close": 144.9}, {"rank": 6, "name": "Ujjivan Small Finance Bank Ltd", "symbol": "UJJIVANSFB", "sector": "Banking (Small Finance)", "close": 65.27}, {"rank": 7, "name": "Lloyds Enterprises Ltd", "symbol": "LLOYDSENT", "sector": "Metals & Mining", "close": 78.18}, {"rank": 8, "name": "Gandhar Oil Refinery (India) Ltd", "symbol": "GANDHAR", "sector": "Oil & Gas", "close": 203.15}, {"rank": 9, "name": "Walchandnagar Industries Limited", "symbol": "WALCHANNAG", "sector": "Capital Goods / Engineering", "close": 261.0}, {"rank": 10, "name": "One 97 Communications Ltd", "symbol": "PAYTM", "sector": "Fintech", "close": 1341.8}, {"rank": 11, "name": "Subex Ltd", "symbol": "SUBEXLTD", "sector": "IT / Software", "close": 13.23}, {"rank": 12, "name": "Enviro Infra Engineers Ltd", "symbol": "EIEL", "sector": "Infrastructure (Water/Enviro)", "close": 244.49}, {"rank": 13, "name": "Mangalore Refinery And Petrochemicals Limited", "symbol": "MRPL", "sector": "Oil & Gas", "close": 162.49}, {"rank": 14, "name": "The South Indian Bank Limited", "symbol": "SOUTHBANK", "sector": "Banking (Private)", "close": 45.81}, {"rank": 15, "name": "Chennai Petroleum Corporation Limited", "symbol": "CHENNPETRO", "sector": "Oil & Gas", "close": 1180.7}, {"rank": 16, "name": "Northern ARC Capital Ltd", "symbol": "NORTHARC", "sector": "Financial Services (NBFC)", "close": 325.3}, {"rank": 17, "name": "Omaxe Limited", "symbol": "OMAXE", "sector": "Realty", "close": 90.48}, {"rank": 18, "name": "Shreeji Shipping Global Ltd", "symbol": "SHREEJISPG", "sector": "Shipping / Logistics", "close": 551.75}]};
+  const DATA_URL = "stage2_data.json";  // reads the JSON in the same repo folder; edit that file weekly to update the list for everyone
+
+  const sectorTheme = (s)=>{
+    s=(s||'').toLowerCase();
+    if(s.includes('bank')||s.includes('nbfc')||s.includes('financ')) return {c:'var(--indigo)',b:'var(--indigo-bg)',t:'var(--indigo)'};
+    if(s.includes('oil')||s.includes('gas')||s.includes('energy')) return {c:'var(--teal)',b:'var(--teal-bg)',t:'var(--teal)'};
+    if(s.includes('fintech')||s.includes(' it')||s.includes('software')) return {c:'var(--amber)',b:'var(--amber-bg)',t:'var(--amber)'};
+    return {c:'var(--slate)',b:'var(--slate-bg)',t:'var(--slate)'};
+  };
+  const r2 = (n)=> (Math.round(n*100)/100).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+  let DATA = EMBEDDED;
+
+  async function boot(){
+    if(DATA_URL){
+      try{ const res = await fetch(DATA_URL,{cache:'no-store'}); if(res.ok){ DATA = await res.json(); } }catch(e){ /* fall back to embedded */ }
+    }
+    document.getElementById('updated').textContent = DATA.updated || '--';
+    document.getElementById('count').textContent = (DATA.stocks||[]).length;
+    document.getElementById('src').textContent = DATA.source || '--';
+    document.getElementById('tape').textContent = (DATA.stocks||[]).map(s=>s.symbol).join('  \u00b7  ');
+    if(DATA.default_stop_pct){ document.getElementById('stop').value = DATA.default_stop_pct; }
+    // sector tilt summary
+    const secs = {};
+    (DATA.stocks||[]).forEach(s=>{ const k=(s.sector||'').toLowerCase();
+      const g = (k.includes('bank')||k.includes('nbfc')||k.includes('financ')||k.includes('fintech'))?'financials':'other';
+      secs[g]=(secs[g]||0)+1; });
+    const fin = secs.financials||0, tot=(DATA.stocks||[]).length;
+    document.getElementById('summary').innerHTML =
+      `<span class="hi">${fin} of ${tot}</span> names are financials (banks, NBFCs, fintech) &mdash; ${Math.round(fin/tot*100)}% of the list leans on one macro theme.`;
+    render();
+  }
+
+  function render(){
+    const pct = parseFloat(document.getElementById('stop').value);
+    const risk = parseFloat(document.getElementById('risk').value);
+    document.getElementById('stopval').textContent = pct+'%';
+    document.getElementById('l-pct').textContent = pct+'%';
+    document.getElementById('l-pct2').textContent = pct+'%';
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    (DATA.stocks||[]).forEach(s=>{
+      const th = sectorTheme(s.sector);
+      const entry = s.close;
+      const stop = entry*(1-pct/100);
+      const riskPS = entry-stop;
+      const hasRisk = risk && risk>0 && riskPS>0;
+      const qty = hasRisk ? Math.floor(risk/riskPS) : null;
+      const card = document.createElement('div');
+      card.className='card';
+      card.style.borderLeftColor = th.c;
+      card.innerHTML =
+        `<div class="head"><span class="rank">#${s.rank}</span><span class="sym">${s.symbol}</span></div>
+         <div class="name" title="${s.name}">${s.name}</div>
+         <span class="tag" style="background:${th.b};color:${th.t}">${s.sector}</span>
+         <div class="stats">
+           <div class="stat"><span class="k">Entry</span><span class="v">${r2(entry)}</span></div>
+           <div class="stat"><span class="k">Stop</span><span class="v stop">${r2(stop)}</span></div>
+           <div class="stat"><span class="k">Risk</span><span class="v">${pct}%</span></div>
+           <div class="stat ${hasRisk?'':'hidden'}"><span class="k">Qty</span><span class="v qty">${hasRisk?qty.toLocaleString('en-IN'):'--'}</span></div>
+         </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  document.getElementById('stop').addEventListener('input', render);
+  document.getElementById('risk').addEventListener('input', render);
+  boot();
+</script>
+</body>
+</html>
